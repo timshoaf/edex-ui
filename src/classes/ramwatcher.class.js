@@ -75,7 +75,7 @@ class RAMwatcher {
             document.getElementById("mod_ramwatcher_swaptext").innerText = `${usedSwapGiB} GiB`;
 
             this.currentlyUpdating = false;
-        });
+        }).catch(err => {console.warn(err.message)});
     }
     shuffleArray(array) {
         for (let i = array.length - 1; i > 0; i--) {

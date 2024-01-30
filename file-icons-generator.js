@@ -199,6 +199,7 @@ Object.keys(atomConfig.directoryIcons).forEach(key => {
 
         if (config.alias) {
             if (typeof config.alias === "string") config.alias = new RegExp(config.alias.replace(/\./g, "\\.")+"$", "i"); // lgtm [js/incomplete-sanitization]
+            if (Array.isArray(config.alias)) config.alias = new RegExp(config.alias.join("$|").replace(/\./g, "\\.")+"$", "i"); // lgtm [js/incomplete-sanitization]
             fileIconsMatchScript += `    if (${config.alias}.test(filename)) { return "${config.icon}"; }\n`;
         }
     }
@@ -218,6 +219,7 @@ Object.keys(atomConfig.fileIcons).forEach(key => {
 
         if (config.alias) {
             if (typeof config.alias === "string") config.alias = new RegExp(config.alias.replace(/\./g, "\\.")+"$", "i"); // lgtm [js/incomplete-sanitization]
+            if (Array.isArray(config.alias)) config.alias = new RegExp(config.alias.join("$|").replace(/\./g, "\\.")+"$", "i"); // lgtm [js/incomplete-sanitization]
             fileIconsMatchScript += `    if (${config.alias}.test(filename)) { return "${config.icon}"; }\n`;
         }
     }
