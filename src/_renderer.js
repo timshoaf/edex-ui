@@ -95,7 +95,14 @@ window._loadTheme = theme => {
     // Load fonts
     let mainFont = new FontFace(theme.cssvars.font_main, `url("${path.join(fontsDir, theme.cssvars.font_main.toLowerCase().replace(/ /g, '_')+'.woff2').replace(/\\/g, '/')}")`);
     let lightFont = new FontFace(theme.cssvars.font_main_light, `url("${path.join(fontsDir, theme.cssvars.font_main_light.toLowerCase().replace(/ /g, '_')+'.woff2').replace(/\\/g, '/')}")`);
-    let termFont = new FontFace(theme.terminal.fontFamily, `url("${path.join(fontsDir, theme.terminal.fontFamily.toLowerCase().replace(/ /g, '_')+'.woff2').replace(/\\/g, '/')}")`);
+    let termFont;
+    if (theme.terminal.fontFamily === "FiraCode Nerd Font") {
+        termFont = new FontFace("FiraCode Nerd Font", `url("${path.join(fontsDir, 'FiraCodeNerdFont-Regular.ttf')}")`)
+        console.log(termFont);
+    }
+    else {
+        termFont = new FontFace(theme.terminal.fontFamily, `url("${path.join(fontsDir, theme.terminal.fontFamily.toLowerCase().replace(/ /g, '_')+'.woff2').replace(/\\/g, '/')}")`);
+    }
 
     document.fonts.add(mainFont);
     document.fonts.load("12px "+theme.cssvars.font_main);
@@ -103,6 +110,7 @@ window._loadTheme = theme => {
     document.fonts.load("12px "+theme.cssvars.font_main_light);
     document.fonts.add(termFont);
     document.fonts.load("12px "+theme.terminal.fontFamily);
+    console.log("Font Loaded");
 
     document.querySelector("head").innerHTML += `<style class="theming">
     :root {
